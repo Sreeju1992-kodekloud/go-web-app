@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Go Web Application
 
 This is a simple website written in Golang. It uses the `net/http` package to serve HTTP requests.
@@ -17,3 +18,6 @@ The server will start on port 8080. You can access it by navigating to `http://l
 ![Website](static/images/golang-website.png)
 
 
+=======
+# go-web-app
+>>>>>>> 0b6948e7a8133374700111e87f2faaae163fa9cb
