@@ -13,6 +13,7 @@ jobs:
         - name: Setup SSH
           run: |
             mkdir -p ~/.ssh
+            touch ~/.ssh/known_hosts
             echo "${{secrets.REPO_B_PRIVATE_KEY}}" > ~/.ssh/id_rsa
             chmod 500 ~/.ssh/known_hosts
 
