@@ -15,7 +15,8 @@ jobs:
             mkdir -p ~/.ssh
             touch ~/.ssh/known_hosts
             echo "${{secrets.REPO_B_PRIVATE_KEY}}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/known_hosts
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
 
         - name: Checkout RepoB
           run: git clone git@github.com:Sreeju1992/Example-Voting-app.git Example-Voting-app
