@@ -1,0 +1,22 @@
+on:
+    workflow_dispatch
+jobs:
+    checkout_repos:
+        runs-on: self-hosted
+
+        steps:
+        - name: Checkout current repo
+          uses: actions/checkout@v4
+          with:
+            path: GO-WEB-APP
+
+        - name: Setup SSH
+          run: |
+            mkdir -p ~/.ssh
+            echo "${{secrets.REPO_B_PRIVATE_KEY}}" > ~/.ssh/id_rsa
+            chmod 500 ~/.ssh/known_hosts
+
+        - name: Checkout RepoB
+          run: git clone git@github.com:Sreeju1992/Example-Voting-app.git Example-Voting-app
+
+    
