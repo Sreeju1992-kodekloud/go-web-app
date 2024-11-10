@@ -39,7 +39,7 @@ jobs:
           run: |
             pwd
             chmod +x migrate.sh
-            migrate.sh inventory
+            ./migrate.sh inventory
 
         - name: Compare and push the files
           working-directory: Example-Voting-app
