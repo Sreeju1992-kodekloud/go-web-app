@@ -31,9 +31,13 @@ jobs:
               fi
             fi
 
+        - name: Get the current path
+          run: pwd
+
         - name: Run Migrate.sh script
           working-directory: GO-WEB-APP/scripts
           run: |
+            pwd
             chmod +x migrate.sh
             migrate.sh inventory
 
