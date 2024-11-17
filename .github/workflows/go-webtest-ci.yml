@@ -71,7 +71,7 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.REPOSITORY_ACCESS_TOKEN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/repos/Sreeju1992-kodekloud/Example-Voting-app/dispatches \
-            -d '{"event_type":"dispatch-event", "client_payload": {"message": "Hello from the trigger repository!"}}'
+            -d '{"event_type":"dispatch-event", "client_payload": {"branch": "git-testing","message": "Hello from the trigger repository!"}}'
 
 
     
