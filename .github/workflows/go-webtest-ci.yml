@@ -21,7 +21,7 @@ jobs:
         - name: Checkout RepoB
           run: |
             if [ ! -d "Example-Voting-app" ]; then
-              git clone git@github.com:Sreeju1992-kodekloud/Example-Voting-app.git Example-Voting-app
+              git clone --branch git-testing git@github.com:Sreeju1992-kodekloud/Example-Voting-app.git Example-Voting-app
             else
               cd Example-Voting-app
               git fetch
@@ -65,7 +65,7 @@ jobs:
         - name: Trigger Workflow in repository B
           if: env.changes_detected == 'true'
           run: |
-            curl -L \
+            curl -L -f \
             -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Bearer ${{ secrets.REPOSITORY_ACCESS_TOKEN }}" \
