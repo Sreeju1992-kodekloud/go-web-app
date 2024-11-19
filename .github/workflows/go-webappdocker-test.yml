@@ -26,7 +26,10 @@ jobs:
           with:
             path: Example-Voting-app
             ssh-key: ${{secrets.REPO_B_PRIVATE_KEY}}
-        
+
+        - name: Configure Workspace as safe directory
+          run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
         - name: Run Migrate.sh script
           working-directory: GO-WEB-APP/scripts
           run: |
