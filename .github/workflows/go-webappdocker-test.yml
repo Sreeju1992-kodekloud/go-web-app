@@ -27,8 +27,10 @@ jobs:
             path: Example-Voting-app
             ssh-key: ${{secrets.REPO_B_PRIVATE_KEY}}
 
-        - name: Configure Workspace as safe directory
-          run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        - name: Set ownership
+          run: |
+              # this is to fix GIT not liking owner of the checkout dir
+              chown -R $(id -u):$(id -g) $PWD
 
         - name: Run Migrate.sh script
           working-directory: GO-WEB-APP/scripts
