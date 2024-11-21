@@ -8,5 +8,5 @@
 
             steps:
             - name: Checkout current repo
-            run: |
+              run: |
                 echo "${{ toJson(github.event) }}"
