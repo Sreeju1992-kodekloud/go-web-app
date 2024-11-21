@@ -1,0 +1,12 @@
+on:
+    push:
+        paths:
+        - 'scripts/**'
+jobs:
+    checkout_repos:
+        runs-on: self-hosted
+
+        steps:
+        - name: Checkout current repo
+          run: |
+            echo "${{ toJson(github.event.commits[*].added) }}"
