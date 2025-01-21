@@ -1,0 +1,27 @@
+    on:
+        push:
+            paths:
+            - 'scripts/**'
+
+        workflow_dispatch:
+            inputs:
+                branch:
+                    type: string
+                    required: true
+    jobs:
+        checkout_repos:
+            runs-on: self-hosted
+
+            steps:
+            - name: Checkout current repo
+              run: |
+                echo "${{ github.event_name }}
+                echo "${{ github.event.inputs.branch }}"
+        
+            - name: Checkout current repo
+              uses: actions/checkout@v4
+              with:
+                ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.branch || github.ref }}
+                path: GO-WEB-APP
+
+            
