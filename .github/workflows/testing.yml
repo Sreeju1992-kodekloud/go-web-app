@@ -1,0 +1,33 @@
+name: Testing
+
+on:
+    push:
+        branches: main
+        paths: 
+        - 'scripts/**'
+
+jobs:
+    build:
+     runs-on: self-hosted
+     outputs: 
+        changed_files: ${{steps.changed-files.outputs.all_changed_files}}
+     steps:
+     - name: Remove old repo
+       run: |
+        rm -rf go-web-app Example-Voting-app
+
+     - name: Checkout repository go-web-app
+       uses: actions/checkout@v4
+       with:
+        path: go-web-app
+        fetch-depth: 0
+    
+     - name: Get changed files
+       id: changed-files
+       uses: tj-actions/changed-files@v45
+       with:
+        since_last_remote_commit: true
+        matrix: true
+
+     - name: List all changed files
+       run: echo '${{steps.changed-files.outputs.all_changed_files}}'

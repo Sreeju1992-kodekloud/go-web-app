@@ -1,7 +1,4 @@
     on:
-        push:
-            paths:
-            - 'scripts/**'
 
         workflow_dispatch:
             inputs:
