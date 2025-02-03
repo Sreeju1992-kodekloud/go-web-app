@@ -28,6 +28,7 @@ jobs:
        with:
         since_last_remote_commit: true
         matrix: true
+        path: go-web-app
 
      - name: List all changed files
        run: echo '${{steps.changed-files.outputs.all_changed_files}}'
