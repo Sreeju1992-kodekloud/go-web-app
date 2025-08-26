@@ -1,14 +1,9 @@
 name: Test New Workflow
 
 on:
-    pull_request:
+    push:
         branches:
-            - main
-
-        types:
-            - opened
-            - synchronize
-            - reopened
+            - test-branch
 
 permissions:
     contents: read
@@ -25,12 +20,23 @@ jobs:
               with:
                   fetch-depth: 0
 
+            - name: Exit
+              run: |
+                git fetch --no-tags origin +refs/heads/${GITHUB_REF#refs/heads/}:refs/remotes/origin/${GITHUB_REF#refs/heads/}
+                COMMIT_MSG=$(git log -1 --pretty=%B)
+                echo "Last Commit message: $COMMIT_MSG"
+                if echo "$COMMIT_MSG" | grep -q "\[skip ci\]"; then
+                    echo "commit message contains [skip ci]. Exiting workflow"
+                    exit 0
+                fi
+
+
             - name: Get changed files
               id: changed-files
               run: |
-                  if [ "${{ github.event_name }}" == "pull_request" ]; then
-                      echo "Changed files in PR:"
-                      CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
+                  if [ "${{ github.event_name }}" == "push" ]; then
+                      echo "Changed files in push:"
+                      CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
                       echo "$CHANGED_FILES"
                   else
                       echo "No changed files detected."
