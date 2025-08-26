@@ -1,0 +1,35 @@
+name: Test New Workflow
+
+on:
+    pull_request:
+        branches:
+            - main
+
+        types:
+            - opened
+            - synchronize
+            - reopened
+
+permissions:
+    contents: read
+    actions: write
+    pull-requests: read
+
+jobs:
+    change-detection:
+        name: Change Detection
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Get changed files
+              id: changed-files
+              run: |
+                  if [ "${{ github.event_name }}" == "pull_request" ]; then
+                      echo "Changed files in PR:"
+                      CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+                      echo "$CHANGED_FILES"
+                  else
+                      echo "No changed files detected."
+                  fi
